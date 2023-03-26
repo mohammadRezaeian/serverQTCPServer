@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QDataStream>
+#include "generator.h"
 
 class socketCreateConnection : public QObject
 {
@@ -20,6 +22,7 @@ public slots:
 private:
     QTcpServer *m_tcpServer;
     QTcpSocket *m_tcpSocket;
+    QVector<double> m_vector;
 };
 
 #endif // SOCKETCREATECONNECTION_H

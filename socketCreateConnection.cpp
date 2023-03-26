@@ -7,6 +7,7 @@ socketCreateConnection::socketCreateConnection(QObject *parent)
     m_tcpSocket = new QTcpSocket(this);
 
     connect(m_tcpServer, &QTcpServer::newConnection, this, &socketCreateConnection::newConnection);
+
 }
 
 void socketCreateConnection::createConnectionServer()
@@ -24,13 +25,18 @@ void socketCreateConnection::createConnectionServer()
 
 void socketCreateConnection::newConnection()
 {
+
+    generator m_generator;
+    m_vector = m_generator.getGenerated();
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out <<  m_vector;
+
     m_tcpSocket = m_tcpServer->nextPendingConnection();
+    m_tcpSocket->write(dat);
+
     connect(m_tcpSocket, &QTcpSocket::readyRead , this , &socketCreateConnection::reciveData);
 
-    m_tcpSocket->write("hello client");
-    m_tcpSocket->flush();
-    m_tcpSocket->waitForBytesWritten(10);
-    //    _socket->close();
 }
 
 void socketCreateConnection::reciveData()
