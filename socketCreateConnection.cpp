@@ -33,7 +33,7 @@ void socketCreateConnection::newConnection()
     out <<  m_vector;
 
     m_tcpSocket = m_tcpServer->nextPendingConnection();
-    m_tcpSocket->write(dat);
+    m_tcpSocket->write(data);
 
     connect(m_tcpSocket, &QTcpSocket::readyRead , this , &socketCreateConnection::reciveData);
 
