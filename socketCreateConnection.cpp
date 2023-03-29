@@ -41,5 +41,8 @@ void socketCreateConnection::newConnection()
 
 void socketCreateConnection::reciveData()
 {
-    qDebug() << m_tcpSocket->readAll();
+    bool _status;
+    QByteArray _data = m_tcpSocket->readAll();
+    QDataStream _stream(&_data , QIODevice::ReadOnly);
+    _stream >> _status;
 }
