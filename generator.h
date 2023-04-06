@@ -4,20 +4,30 @@
 #include <QObject>
 #include <QtMath>
 #include <QVector>
+#include <QTimer>
+#include <QDateTime>
+#include <QDebug>
+#include <QElapsedTimer>
+#include <QCoreApplication>
 
-class generator : public QObject
+class Generator : public QObject
 {
     Q_OBJECT
 public:
-    explicit generator(QObject *parent = nullptr);
-    QVector<double> getGenerated() const;
+    explicit Generator(QObject *parent = nullptr);
+    ~Generator();
+//    QVector<double> getGenerated() const;
+
+    bool status() const;
+    void setStatus(bool newStatus);
 
 private:
-    QVector<double> m_generated;
-
     void genereteNumbers();
-
+    QTimer *m_timer;
+    void checkUpperThan(const QVector<double> &_vector);
+    bool m_status{true};
 signals:
+    void dataCreated(double _generated);
 
 };
 
